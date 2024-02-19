@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Porównaj właściwości{% endblock  %}
+
+{% block content %}
+<form action="{% url "uzytkownik:porownaj" %}" class="formularz-wpisu">
+    <div class="compare-bar">
+        <form class="formularz-porownania" method="get" action="{% url "uzytkownik:porownaj" %}">
+            <div class="custom-select">   
+                <select name="query1" value="{{ query1 }}">
+                    {% for rekord in rekordy %}
+                        <option value="{{rekord.pk}}"> {{rekord}}</option>
+                    {% endfor %}
+                </select>
+                <select name="query2" value="{{ query2 }}">
+                    {% for rekord in rekordy %}
+                        <option value="{{rekord.pk}}"> {{rekord}}</option>
+                    {% endfor %}
+                </select>
+            </div> 
+            <button>Porównaj</button>
+        </form>
+        <hr>
+        <ul class="lista-utility">
+            <li><a href="{% url "uzytkownik:porownaj" %}" class="przycisk-utility">Wyczyść filtry</a></li>
+        </ul>
+    </div>
+    <div class="porownianie-wrapper">
+        {% if licznik > 1 %}
+            <div style="margin-left: auto; margin-right: auto;"><h3>Wybierz dane do porównania</h3></div>            
+        {% else %}
+            {% for wynik in wynik1 %}
+                <div class="porownanie-1">
+                    <h1><a href="{% url "uzytkownik:gatunek-uzytkownika-detail" wynik.slug %}" class="h1-link">{{ wynik.nazwa }}</a></h1>
+                    <div class="tabela">
+                        <h2>Właściwości fizyczne</h2>
+                        <div class="kafelek">
+                            <div class="komorka-lewa">
+                                Gęstość
+                            </div>
+                            <div class="komorka-prawa">
+                                {{ wynik.gestosc }} g/cm3
+                            </div>
+                        </div>
+                    </div>
+                    {% if wl_mechaniczne1 %}
+                        <div class="tabela">
+                            <h2>Właściwości mechaniczne</h2>
+                            {% for mechaniczne in wl_mechaniczne1 %}
+                                {% for key, value in mechaniczne.items %}
+                                    {% if value == None %}
+                                    {% else %}
+                                        <div class="kafelek">
+                                            <div class="komorka-lewa">
+                                                {{ key }} 
+                                            </div>
+                                            <div class="komorka-prawa">
+                                                {{ value }}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="tabela">
+                            <h2>Brak właściwości mechanicznych do wyświetlenia</h2> 
+                        </div>
+                    {% endif %}
+                    {% if sklad_chemiczny_list1 %}
+                        <div class="tabela">
+                            <h2>Skład chemiczny</h2>
+                            {% for sklad_chemiczny in sklad_chemiczny_list1 %}
+                                {% for key, value in sklad_chemiczny.items %}
+                                    {% if value == None %}
+                                    {% else %}
+                                        <div class="kafelek">
+                                            <div class="komorka-lewa">
+                                                {{ key }} 
+                                            </div>
+                                            <div class="komorka-prawa">
+                                                {{ value }}%
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="tabela">
+                            <h2>Brak składu chemicznego do wyświetlenia</h2> 
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            {% for wynik in wynik2 %}
+                <div class="porownanie-1">
+                    <h1><a href="{% url "uzytkownik:gatunek-uzytkownika-detail" wynik.slug %}" class="h1-link">{{ wynik.nazwa }}</a></h1>
+                    <div class="tabela">
+                        <h2>Właściwości fizyczne</h2>
+                        <div class="kafelek">
+                            <div class="komorka-lewa">
+                                Gęstość
+                            </div>
+                            <div class="komorka-prawa">
+                                {{ wynik.gestosc }} g/cm3
+                            </div>
+                        </div>
+                    </div>
+                    {% if wl_mechaniczne2 %}
+                        <div class="tabela">
+                            <h2>Właściwości mechaniczne</h2>
+                            {% for mechaniczne in wl_mechaniczne2 %}
+                                {% for key, value in mechaniczne.items %}
+                                    {% if value == None %}
+                                    {% else %}
+                                        <div class="kafelek">
+                                            <div class="komorka-lewa">
+                                                {{ key }} 
+                                            </div>
+                                            <div class="komorka-prawa">
+                                                {{ value }}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="tabela">
+                            <h2>Brak właściwości mechanicznych do wyświetlenia</h2> 
+                        </div>
+                    {% endif %}
+                    {% if sklad_chemiczny_list2 %}
+                        <div class="tabela">
+                            <h2>Skład chemiczny</h2>
+                            {% for sklad_chemiczny in sklad_chemiczny_list2 %}
+                                {% for key, value in sklad_chemiczny.items %}
+                                    {% if value == None %}
+                                    {% else %}
+                                        <div class="kafelek">
+                                            <div class="komorka-lewa">
+                                                {{ key }} 
+                                            </div>
+                                            <div class="komorka-prawa">
+                                                {{ value }}%
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="tabela">
+                            <h2>Brak składu chemicznego do wyświetlenia</h2> 
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</form>    
+{% endblock  %}

@@ -1,0 +1,433 @@
+html {
+    font-size: 62.5%;
+
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins';
+}
+
+.wrapper{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#pudlo_log_rej, .formularz-wpisu {
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    text-align: center;
+    padding: 50px;
+    border-radius: .8em;
+    font-size: 13px;
+}
+
+#pudlo_log_rej input, .formularz-wpisu input, .search-input {
+    font-size: 20px;
+    margin-bottom: 10px;
+    border-radius: .2em;
+    border: 2px solid rgb(172, 172, 172);
+}
+
+#pudlo_log_rej input:first-child, .formularz-wpisu input:first-child {
+    margin-top: 10px;
+}
+
+/* Pasek nawigacji */
+
+#logo {
+    width: 70%; 
+    height: auto; 
+}
+
+header, .kafelek {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav {
+    margin: 4em;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 4.1em;
+    margin: 0;
+}
+
+/* można w ten sposób ale dokładniej jest tak nav ul li a | albo zrobić klasę/id */
+nav a{
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    position: relative;
+}
+
+nav ul li a.active:before {
+    position: absolute;
+    content: "";
+    width: 35%;
+    height: 1px;
+    border-bottom: 2px solid black;
+    bottom: -6px;
+}
+
+nav ul li a::before {
+    position: absolute;
+    content: "";
+    width: 0%;
+    height: 1px;
+    border-bottom: 2px solid rgb(172, 172, 172);
+    bottom: -6px;
+    transition: width .3s;
+}
+
+/* main */
+
+main {
+    display: flex;
+    gap: 8em;
+    margin-top: 11em;
+}
+
+.lewa-kolumna, .lewa-kolumna-profil {
+    width: 45%;
+}
+
+.prawa-kolumna, .prawa-kolumna-profil {
+    flex-grow: 1;
+}
+
+h1  {
+    font-size: 5.2rem;
+    font-family: 'Playfair Display';
+    font-weight: normal;
+    margin: 0;
+}
+
+.subhead {
+    font-size: 1.8rem;
+}
+
+.przyciski-lewo {
+    margin: 5em 0;
+}
+
+.przyciski-lewo, .poboczny-przycisk {
+    display: flex;
+    gap: 2em;
+}
+
+.przycisk-lewo {
+    background-color: #F1E2D1;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+    border-radius: 1.9em;
+    padding: 1em 2em;
+}
+
+.poboczny-przycisk {
+    font-size: 1.6rem;
+    color: black;
+    text-decoration: none;
+    display: block;
+    padding: 1em 0;
+}
+
+.poboczny-przycisk svg, .profil-przycisk svg {
+    width: 20px;
+    transition: transform .3s;
+}
+
+.wiadomosci {
+    display: flex;
+}
+
+.wiadomosci, .profil-szczegoly, .lewa-kolumna-profil, .komentarze, .side-bar, .compare-bar{
+    gap: 3em;
+    border: 1px solid black;
+    border-radius: .8em;
+    position: relative;
+}
+
+.side-bar, .compare-bar {
+    padding: 1em;
+}
+
+.wiadomosci, .profil-szczegoly, .lewa-kolumna-profil, .komentarze {
+    padding: 5em;
+}
+
+.wiadomosci:before {
+    position: absolute;
+    content: "";
+    background: url(../images/confetti.svg);
+    width: 100px;
+    height: 100px;
+    top: -20px;
+    left: -20px;
+    z-index: 2;
+}
+
+p.pracownicy {
+    font-size: 3.3rem;
+    margin: 0;
+    font-weight: 200;
+    line-height: 100%;
+}
+
+p.szczegoly {
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+/* zdjęcia prewej kolumny */
+
+.prawa-kolumna {
+    display: grid;
+    gap: 2.3em;
+    grid-template-columns: repeat(2,auto);
+    grid-template-areas: 
+        "lewa prawa" /* wymyslenie struktory przez nadanie nazwy */
+        "lewa dol";
+}
+
+.karta {
+    border-radius: .8em;
+    padding: 1.1em;
+    display: flex;
+    align-items: end;
+    background-size: 150%;
+    transition: background-size 800ms;
+}
+
+.karta1 {
+    grid-area: lewa; /* wskazanie nazwy */
+    background-image: url(../images/sztabki-metalu.jpg);
+    position: relative;
+    
+}
+
+.karta1::before{
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 20px;
+    left: -30px;
+    pointer-events: none; /* bez tego nie będzie się dało kliknąć w link w kafelku */
+}
+
+.karta2 {
+    background-image: url(../images/samolot.jpg);
+}
+
+.karta3 {
+    background-image: url(../images/WO.jpg);
+}
+
+.opis-karty {
+    background: white;
+    border-radius: .6em;
+    padding: 2em;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: transform 800ms;
+}
+
+.opis-karty a {
+    color: black;
+    text-decoration: none;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.opis-karty p {
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+p.cena-produktu{
+    font-size: 1.8rem;
+}
+
+/* mikrointerakcje */
+
+nav ul li a:hover:before {
+    width: 35%;
+}
+
+.przycisk-lewo:hover {
+    background-color: #e2D1BD;
+}
+
+.poboczny-przycisk:hover svg, .profil-przycisk:hover svg {
+    transform: translateX(10px);
+}
+
+.poboczny-przycisk:hover, .profil-przycisk:hover, .przycisk-utility:hover { 
+    text-decoration: underline;
+}
+
+.karta:hover {
+    background-size: 160%;
+}
+
+.karta:hover .opis-karty {
+    transform: translateY(-20px);
+}
+
+.kafelek:nth-child(even), .kafelek-wyszukiwanie:nth-child(odd) {
+    background: rgb(247, 247, 247);
+}
+
+.tabela{
+    margin: auto;
+    padding: 5px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.komorka-lewa, .komorka-prawa {
+    width: 45%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-weight: bolder; 
+    text-align: center;
+}
+
+
+.komentarze {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.pojemnik {
+    display: flex;
+    gap: 8em;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+}
+
+.compare-bar, .side-bar {
+    background-color: rgb(247, 247, 247);
+}
+
+.side-bar {
+    font-size: 13px;
+    width: 25%;    
+}
+
+.komorka-lewa-wyszukiwanie {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-weight: bolder; 
+    text-align: center;
+    width: 818px;
+}
+
+
+.komorka-lewa-wyszukiwanie a:hover, .compare-bar button:hover {
+    color: #e2D1BD;
+}
+
+.lewa-kolumna-profil a, .h1-link, .przycisk-utility, .komorka-lewa-wyszukiwanie a {
+    text-decoration: none;
+    color: black;
+}
+
+.lewa-kolumna-profil a:hover {
+    color: #0a58ca;
+}
+
+.lewa-kolumna-profil li a.active:before {
+    position: absolute;
+    content: "";
+    width: 35%;
+    height: 1px;
+    border-bottom: 2px solid black;
+    bottom: -6px;
+}
+
+.lewa-kolumna-profil li a.active:before {
+    position: absolute;
+    content: "";
+    width: 0%;
+    height: 1px;
+    border-bottom: 2px solid rgb(172, 172, 172);
+    bottom: -6px;
+    transition: width .3s;
+}
+
+.pole-formularza {
+    margin-bottom: 1rem;
+}
+
+.pole-formularza label {
+    margin-bottom: 0.5 rem;
+    font-size: 13px;
+    display: block;
+}
+
+.porownanie-1 {
+    width: 40%;
+    text-align: center;
+}
+
+.porownianie-wrapper{
+    display: flex;
+    gap: 25rem;
+}
+
+.custom-select {
+    position: relative;
+}
+
+.compare-bar button, .side-bar button{
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.compare-bar button {
+    margin: 10px;
+}
+
+.compare-bar select,  .pole-formularza select {
+    margin-left: 5px;
+    padding: 5px;
+}
+
+.lista-utility{
+    padding-left: 0;
+}
+
+.lista-utility li{
+    list-style: none;
+}
+
+.errors input {
+    border-color: #680000;
+    background-color: #fde3e3;
+}
+
+.errors label {
+    color: #680000;
+}
+
+.errorlist {
+    list-style: none;
+    margin: 0.5rem 0;
+    padding: 0;
+    color: #680000;
+}

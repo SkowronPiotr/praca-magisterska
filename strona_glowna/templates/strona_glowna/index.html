@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Strona główna
+{% endblock  %}
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "strona_glowna/styles/animation.css" %}"> 
+{% endblock %}
+
+{% block content %}
+    
+        
+
+        <main>
+            <div class="lewa-kolumna">
+                <h1>Baza danych dla lotnictwa i energetyki</h1>
+                <p class="subhead">Na mojej stronie możesz, przeglądać zapisane dane, tworzyć, edytować i porównywać</p>
+                <div class="przyciski-lewo">
+                    <a href="{% url "uzytkownik:porownaj" %}" class="przycisk-lewo">Porównaj gatunki</a>
+                    <a href="{% url "wyszukiwanie" %}" class="poboczny-przycisk">
+                        <span>Wyszukaj</span>
+                        <svg viewBox="0 0 19 8" fill="none">
+                            <path d="M18.3536 4.35355C18.5488 4.15829 18.5488 3.84171 18.3536 3.64645L15.1716 0.464466C14.9763 0.269204 14.6597 0.269204 14.4645 0.464466C14.2692 0.659728 14.2692 0.976311 14.4645 1.17157L17.2929 4L14.4645 6.82843C14.2692 7.02369 14.2692 7.34027 14.4645 7.53553C14.6597 7.7308 14.9763 7.7308 15.1716 7.53553L18.3536 4.35355ZM0 4.5H18V3.5H0V4.5Z" fill="black"/>
+                        </svg>
+                    </a>
+                </div>
+                
+                <div class="wiadomosci">
+                    <p class="pracownicy">{{suma}}</p>
+                    <p class="szczegoly">W bazie, stworzonej przez użytkowników naszej strony, znajduję się ponad <strong>{{suma}}</strong> różnych gatunków superstopów wykorzystywanych w przemyśle. Wszystkie informacje pochodzą z domeny matweb.com lub są to materiały własne autorstwa użytkowników strony</p>
+                </div>
+            </div>
+            <div class="prawa-kolumna">
+                <div class="karta karta1">
+                    <div class="opis-karty">
+                        <div>
+                            <a href="#" class="tytuł-produktu">Super stopy</a>
+                            <p>Przejdź do kategorii wyszukiwania</p>
+                        </div>
+                        <p class="cena-produktu">250</p>
+                    </div>
+                </div>
+                <div class="karta karta2">
+                    <div class="opis-karty">
+                        <div>
+                            <a href="#" class="tytuł-produktu">Materiały lotnicze</a>
+                            <p>Przejdź do kategorii wyszukiwania</p>
+                        </div>
+                        <p class="cena-produktu">140</p>
+                    </div>
+                </div>
+                <div class="karta karta3">
+                    <div class="opis-karty">
+                        <div>
+                            <a href="https://odlewnictwo.agh.edu.pl/wydzial/" class="tytuł-produktu">Wydział Odlewnictwa</a>
+                            <p>Przejdź na stronę wydziału</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+{% endblock  %}

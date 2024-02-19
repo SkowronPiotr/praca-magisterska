@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Twoje wpisy{% endblock  %}
+
+{% block content %}
+    <div class="tabela">
+        {% for rekord in rekordy %}
+        <div class="kafelek">
+            <div class="komorka-lewa-wyszukiwanie">
+                <a href="{% url "uzytkownik:gatunek-uzytkownika-detail" rekord.slug %}">{{ rekord.nazwa }}</a>
+            </div>
+            <div class="komorka-prawa">
+                <a href="{% url "uzytkownik:edytuj" rekord.slug %}">Edytuj</a>
+                <a href="{% url "uzytkownik:usun" rekord.slug %}">Usuń</a>
+            </div>
+        </div>
+        {% endfor %}    
+    </div>
+{% endblock  %}

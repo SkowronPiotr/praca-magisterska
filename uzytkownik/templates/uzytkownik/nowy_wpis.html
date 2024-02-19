@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Stwórz własny wpis{% endblock  %}
+
+{% block content %}
+
+<form action="{% url "uzytkownik:nowy_wpis" %}" method="POST" class="formularz-wpisu">
+    {% csrf_token %}
+    <h2>Wypełnij dane</h2>
+    {% for form_field in formularz_gestosci %}
+        <div class="pole-formularza">
+            {{ form_field.label_tag }}
+            {{ form_field }}
+            {{ form_field.errors }}
+        </div>
+    {% endfor %}
+    <button type="submit">Zapisz</button>
+</form>
+
+{% endblock  %}

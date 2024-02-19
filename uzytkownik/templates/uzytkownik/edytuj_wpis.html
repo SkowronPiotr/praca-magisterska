@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Edytuj wpis{% endblock  %}
+
+{% block content %}
+
+<form action="" method="POST" class="formularz-wpisu">
+    {% csrf_token %}
+    <h2>Edytuj dane</h2>
+    {% for form_field in formularz_gestosci %}
+        <div class="pole-formularza">
+            {{ form_field.label_tag }}
+            {{ form_field }}
+            {{ form_field.errors }}
+        </div>
+    {% endfor %}
+    <button type="submit">Aktualizuj</button>
+</form>
+
+{% endblock  %}

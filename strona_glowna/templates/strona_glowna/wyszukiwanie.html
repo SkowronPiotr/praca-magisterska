@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Znajdź swój materiał!
+{% endblock  %}
+
+{% block content %}
+    <div class="pojemnik">
+        <div class="side-bar">
+            <form method="get" action="{% url "wyszukiwanie" %}">
+                <input type="text" name="query" value="{{ query }}" class="search-input" placeholder="Wpisz frazę">
+                <button>Szukaj</button>
+            </form>
+            <hr>
+            <p class="subhead">Kategorie</p>
+            <ul class="lista-utility">
+            {% for kategoria in kategorie %}
+                <li>
+                    <a href="{% url "wyszukiwanie" %}?query={{ query }}&kategoria={{ kategoria.id }}" class="przycisk-utility"  {% if kategoria.id == kategoria_id %}style="color: #e2D1BD;text-decoration:underline;"{% endif %}>{{ kategoria.nazwa }}</a>
+                </li>
+            {% endfor %}
+            </ul>       
+            <hr>
+            <p class="subhead">Filtry</p>
+            <ul class="lista-utility">
+                <li><a href="{% url "wyszukiwanie" %}" class="przycisk-utility">Wyczyść filtry</a></li>
+            </ul>
+        </div>
+        <div class="wyszukiwanie">
+                {% for gatunek in gatunki %}
+                    <div class="kafelek-wyszukiwanie">
+                        <div class="komorka-lewa-wyszukiwanie">
+                            <a href="{% url "gatunek-detail" gatunek.Id_gatunku %}">{{ gatunek.gatunek }}</a>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% for gatunek in gatunki_uzytkownika %}
+                    <div class="kafelek-wyszukiwanie">
+                        <div class="komorka-lewa-wyszukiwanie">
+                            <a href="{% url "uzytkownik:gatunek-uzytkownika-detail" gatunek.slug %}">{{ gatunek.nazwa }}</a>
+                        </div>
+                    </div>
+                {% endfor %}
+        </div>
+    </div>
+{% endblock  %}

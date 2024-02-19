@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ gatunek.nazwa }}{% endblock  %}
+
+{% block content %}
+    <h1>{{ gatunek.nazwa }}</h1>
+    <h3><a href="{% url "uzytkownik:porownaj" %}?query1={{ query }}&query2={{query}}" class="h1-link" style="padding:10px;">Dodaj do porówniania</a></h3>
+    <div class="tabela">
+        <h2>Właściwości fizyczne</h2>
+        <div class="kafelek">
+            <div class="komorka-lewa">
+                Gęstość
+            </div>
+            <div class="komorka-prawa">
+                {{ gatunek.gestosc }} g/cm3
+            </div>
+        </div>
+    </div>
+    {% if wl_mechaniczne %}
+        <div class="tabela">
+            <h2>Właściwości mechaniczne</h2>
+            {% for key, value in wl_mechaniczne.items %}
+                {% if value == None %}
+                {% else %}
+                    <div class="kafelek">
+                        <div class="komorka-lewa">
+                            {{ key }} 
+                        </div>
+                        <div class="komorka-prawa">
+                            {{ value }}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            {% if wykres_mechaniczny %}
+                <div style="margin:auto;text-align: center;">
+                    <img style="margin:auto;" src="data:image/png;base64, {{ wykres_mechaniczny|safe }}" alt="">
+                </div>
+            {% endif %}
+        </div>
+    {% else %}
+        <div class="tabela">
+            <h2>Brak właściwości mechanicznych do wyświetlenia</h2> 
+        </div>
+    {% endif %}
+
+    {% if sklad_chemiczny %}
+        <div class="tabela">
+            <h2>Skład chemiczny</h2>
+            {% for key, value in sklad_chemiczny.items %}
+                {% if value == None %}
+                {% else %}
+                    <div class="kafelek">
+                        <div class="komorka-lewa">
+                            {{ key }} 
+                        </div>
+                        <div class="komorka-prawa">
+                            {{ value }}%
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            
+            {% if wykres_pierwiastkow %}
+                <div style="margin:auto;text-align: center;">
+                    <img style="margin:auto;" src="data:image/png;base64, {{ wykres_pierwiastkow|safe }}" alt="">
+                </div>
+            {% endif %}
+        </div>
+    {% else %}
+        <div class="tabela">
+            <h2>Brak składu chemicznego do wyświetlenia</h2> 
+        </div>
+    {% endif %}
+
+    <div class="komentarze">
+        <h3>Informacje dodatkowe</h3>
+        <div>            
+            {% if gatunek.informacje_dodatkowe == None %}
+            {% else %}
+                <p>{{ gatunek.informacje_dodatkowe }}</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock  %}

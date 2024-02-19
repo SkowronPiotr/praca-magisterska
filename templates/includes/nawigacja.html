@@ -1,0 +1,20 @@
+{% load static %}
+<header>
+    <a href="{% url "strona_glowna" %}"><img src="{% static "strona_glowna/images/AGH.svg" %}" id="logo" alt="Logo strony"></a>
+
+    <nav>
+        <ul>
+            <li><a href="{% url "strona_glowna" %}" {% if is_index_active %}class="active"{% endif %}>Strona główna</a></li>
+            {% if request.user.is_authenticated %}
+                <li><a href="{% url "uzytkownik:profil" %}"{% if is_profile_active %}class="active"{% endif %}>Profil</a></li>
+            {% else %}
+                <li><a href="{% url 'logowanie' %}" {% if is_login_active %}class="active"{% endif %}>Zaloguj się</a></li>
+            {% endif %}
+            <li><a href="{% url "wyszukiwanie" %}" {% if is_szukaj_active %}class="active"{% endif %}>Szukaj</a></li>
+            <li><a href="{% url 'kontakt' %}" {% if is_kontakt_active %}class="active"{% endif %}>Kontakt</a></li>
+            {% if request.user.is_authenticated %}
+                <li><a href="{% url 'wyloguj' %}">Wyloguj</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>

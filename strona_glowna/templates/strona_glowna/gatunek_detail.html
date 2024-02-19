@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ gatunek.gatunek }}{% endblock  %}
+
+{% block content %}
+    <h1>{{ gatunek.gatunek }}</h1>
+    <div class="tabela">
+        <h2>Właściwości fizyczne</h2>
+        <div class="kafelek">
+            <div class="komorka-lewa">
+                Gęstość
+            </div>
+            <div class="komorka-prawa">
+                {{ fizyczne.Density }} g/cm3
+            </div>
+        </div>
+    </div>
+
+    <div class="tabela">
+        <h2>Właściwości mechaniczne</h2>
+        {% for key, value in wl_mechaniczne.items %}
+            {% if value == None %}
+            {% else %}
+                <div class="kafelek">
+                    <div class="komorka-lewa">
+                        {{ key }}
+                    </div>
+                    <div class="komorka-prawa">
+                        {{ value }}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="tabela">
+        <h2>Skład chemiczny</h2>
+        {% for key, value in sklad_chemiczny.items %}
+            {% if value == None %}
+            {% else %}
+                <div class="kafelek">
+                    <div class="komorka-lewa">
+                        {{ key }} 
+                    </div>
+                    <div class="komorka-prawa">
+                        {{ value }}%
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="komentarze">
+        <h3>Informacje dodatkowe</h3>
+        <div>
+            {% if komentarze.Komentarz == None %}
+            {% else %}
+                <p>{{ komentarze.Komentarz }}</p>
+            {% endif %}
+        </div>
+        <div>
+            {% if komentarze.Aplikacje == None %}
+            
+            {% else %}
+                <p>{{ komentarze.Aplikacje }}</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock  %}

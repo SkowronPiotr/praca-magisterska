@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Zarejestruj się!{% endblock  %}
+
+{% block content %}
+<div id="pudlo_log_rej">
+    <div style="margin-bottom: 20px;">
+        <h1>Zarejestruj się!</h1>
+    </div>    
+
+    <form action="." method="post">
+        {% csrf_token %}
+        <div {% if formularz.errors or formularz.non_field_errors %}class="errors"{% endif %} >
+            <div>
+                <p>Podaj nazwę użytkownika</p>   
+                {{ formularz.username }}
+            </div>
+            <div>
+                <p>Podaj swój adres mailowy</p>    
+                {{ formularz.email }}
+            </div>
+            <div>
+                <p>Podaj hasło</p>    
+                {{ formularz.password1 }}
+            </div>
+            <div>
+                <p>Powtórz hasło</p>    
+                {{ formularz.password2 }}
+            </div>
+        </div>
+        {% if formularz.errors or formularz.non_field_errors %}
+            <div class="errors">
+                {{ formularz.errors }}
+
+                
+            {{ formularz.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <button>Potwierdź</button>
+    </form>
+</div>
+{% endblock  %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Witaj!{% endblock  %}
+
+{% block content %}
+<div style="text-align: center;">
+    <h1>Witaj na naszej stronie!</h1>
+    <p>Dziękujemy, że nas odwiedziłeś.</p>
+
+    <!-- Przycisk do otwierania modala -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#welcomeModal">
+        Pokaż wiadomość powitalną
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="welcomeModalLabel">Wiadomość powitalna</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Wiadomość do napisania na powitanie użytkownika na stronie internetowej Wiadomość do napisania na powitanie użytkownika na stronie internetowej</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="closeButton" class="btn btn-secondary" data-bs-dismiss="modal">Przejdź na stronę główną</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock  %}
+
+
