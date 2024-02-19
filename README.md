@@ -15,5 +15,5 @@ User doesn't have to create account to use basic functions which are:
 - Compare 2 records from database on separate website
 
 A user who has an account may additionally:
-- Create his own data record, edit and delete and these records are avaible to see for all users
+- Create his own data record, edit and delete, these records are avaible to see for all users
 
