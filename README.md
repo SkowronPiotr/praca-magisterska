@@ -2,9 +2,7 @@
 
 ## Technologies and tools used in project
 ### Python/Django, HTML, CSS
-There are some additional function that helped me in this project. Data comes from matweb.com and I downloaded 30 records and through pandas and some SQL implemented them to models. Charts are displayed due to matplotlib usage.
-
-In my opinion it's finished project but I am waiting for the opinion of a professor from my university, maybe he had some more ideas I could implement
+There are some additional function that helped me in this project. Data comes from matweb.com, I downloaded 30 records and through pandas and some SQL implemented them to models. Charts are displayed due to matplotlib usage.
 
 ## What you can do on this website
 
