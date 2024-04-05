@@ -3,6 +3,7 @@ from .models import DaneWlasciwosciMechanicznych, DaneWlasciwosciFizycznych, Dan
 from uzytkownik.models import GatunekUzytkownika
 
 
+@admin.register(GatunekUzytkownika)
 class GatunekUzytkownikaAdmin(admin.ModelAdmin):
     list_filter = ()
    # list_display = ("nazwa", "kategoria")
@@ -16,4 +17,4 @@ admin.site.register(DaneWlasciwosciMechanicznych)
 admin.site.register(Kategorie)
 admin.site.register(Komentarze)
 admin.site.register(Gatunek)
-admin.site.register(GatunekUzytkownika, GatunekUzytkownikaAdmin)
+# admin.site.register(GatunekUzytkownika, GatunekUzytkownikaAdmin)

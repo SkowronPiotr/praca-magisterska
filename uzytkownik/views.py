@@ -1,11 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-from django.views import View
+from django.views import View, generic
 from django.contrib.auth.decorators import login_required
 from django.template.defaultfilters import slugify
 from django.db.models import Q
 from praca_magisterska.funkcje import get_plot, get_bar_plot
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 
 from uzytkownik.forms import GatunekUzytkownikaForm, EdycjaGatunekUzytkownikaForm
 from uzytkownik.models import GatunekUzytkownika
@@ -110,22 +112,39 @@ def profil(request):
     """
     Profile page
     """
-    uzytkownik = request.user
+    # uzytkownik = request.user
 
     return render(request, 'uzytkownik/profil.html', {
-        "uzytkownik": uzytkownik,
+        # "uzytkownik": uzytkownik,
         'is_profile_active': True,
     })
 
 
-def panel_uzytkownika(request):
+class Profil(LoginRequiredMixin, generic.DetailView):
+    template_name = 'uzytkownik/profil.html'
+    model = User
+    # context_object_name = 'uzytkownik'
+
+    def get_object(self):
+        return self.request.user
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['is_profile_active'] = True
+        return context
+
+
+class PanelUzytkownikaView(generic.ListView):
     """
     Page for user to see list of records he created, he can edit them or delete,
     """
-    rekordy = GatunekUzytkownika.objects.filter(stworzony_przez=request.user)
-    return render(request, "uzytkownik/twoje_wpisy.html", {
-        "rekordy": rekordy,
-    })
+    model = GatunekUzytkownika
+    template_name = "uzytkownik/twoje_wpisy.html"
+    # paginate_by = 10
+    # to be added
+
+    def get_queryset(self):
+        return super().get_queryset().filter(stworzony_przez=self.request.user)
 
 
 def edytuj_wpis_uzytkownika(request, slug):
@@ -173,16 +192,6 @@ class EdytujWpisUzytkownikaView(View):
             "formularz_gestosci": EdycjaGatunekUzytkownikaForm(instance=rekord),
         }
         return render(request, "uzytkownik/edytuj_wpis.html", context)
-
-
-def usun(request, slug):
-    """
-    Deletesrecord
-    """
-    rekord = get_object_or_404(
-        GatunekUzytkownika, slug=slug, stworzony_przez=request.user)
-    rekord.delete()
-    return redirect("uzytkownik:twoje_wpisy")
 
 
 class NowyWpisUzytkownikaView(View):

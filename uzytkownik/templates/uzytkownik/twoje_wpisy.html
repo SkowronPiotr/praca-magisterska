@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="tabela">
-        {% for rekord in rekordy %}
+        {% for rekord in object_list %}
         <div class="kafelek">
             <div class="komorka-lewa-wyszukiwanie">
                 <a href="{% url "uzytkownik:gatunek-uzytkownika-detail" rekord.slug %}">{{ rekord.nazwa }}</a>

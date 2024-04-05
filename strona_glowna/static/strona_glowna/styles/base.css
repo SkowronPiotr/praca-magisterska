@@ -394,7 +394,7 @@ nav ul li a:hover:before {
     position: relative;
 }
 
-.compare-bar button, .side-bar button{
+.compare-bar button, .side-bar button .delete-form button{
     padding: 5px;
     border-radius: 5px;
 }

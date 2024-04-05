@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div style="text-align:center;">
+  <h1>Czy chcesz usnąć: "{{object}}"</h1>
+</div>
+<form method="post" action="" class="formularz-wpisu">
+  {% csrf_token %}
+  {{form.as_p}}
+  <button type="submit" style="test-align:center;">Tak usuń</button>
+</form>
+
+{% endblock %}
