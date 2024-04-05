@@ -8,6 +8,13 @@ Libraries:
 - matplotlib
 - pandas
 
+## Features
+- Django authentication
+- Posting, editing, deleting records
+- Searching and filtering
+- Comparing data records
+- Charts
+
 ## What you can do on this website
 
 The website is a database containing superalloy records for, among others, the aviation or energy industries
