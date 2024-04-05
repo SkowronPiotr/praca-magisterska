@@ -5,8 +5,8 @@
 There are some additional function that helped me in this project. Data comes from matweb.com, I downloaded 30 records and through pandas and some SQL implemented them to models. Charts are displayed due to matplotlib usage.
 <br>
 Libraries:
--matplotlib
--pandas
+- matplotlib
+- pandas
 
 ## What you can do on this website
 
