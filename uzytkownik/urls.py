@@ -3,15 +3,14 @@ from uzytkownik import views
 # from django.views.generic import CreateView, UpdateView, DeleteView
 from django.views import generic
 
-from uzytkownik.views import NowyWpisUzytkownikaView, EdytujWpisUzytkownikaView, PanelUzytkownikaView
+from uzytkownik.views import NowyWpisUzytkownikaView, EdytujWpisUzytkownikaView, PanelUzytkownikaView, Profil
 from .models import GatunekUzytkownika
 
 app_name = 'uzytkownik'
 
 urlpatterns = [
-    path("", views.profil, name="profil"),
+    path("", Profil.as_view(), name="profil"),
     path("nowy_wpis/", NowyWpisUzytkownikaView.as_view(), name="nowy_wpis"),
-    # path("twoje_wpisy/", views.panel_uzytkownika, name="twoje_wpisy"),
     path("twoje_wpisy/", PanelUzytkownikaView.as_view(), name="twoje_wpisy"),
     path("porownaj/", views.porownaj_rekordy, name="porownaj"),
     path("<slug:slug>/", views.gatunek_uzytkownika_detail,

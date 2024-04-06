@@ -2,17 +2,13 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.views import View, generic
-from django.contrib.auth.decorators import login_required
-from django.template.defaultfilters import slugify
-from django.db.models import Q
-from praca_magisterska.funkcje import get_plot, get_bar_plot
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 
-from uzytkownik.forms import GatunekUzytkownikaForm, EdycjaGatunekUzytkownikaForm
+from uzytkownik.forms import GatunekUzytkownikaForm
 from uzytkownik.models import GatunekUzytkownika
-from strona_glowna.models import Gatunek
-import matplotlib.pyplot as plt
+
+from praca_magisterska.funkcje import get_plot, get_bar_plot
 
 
 def gatunek_uzytkownika_detail(request, slug):
@@ -107,19 +103,6 @@ def porownaj_rekordy(request):
     })
 
 
-@login_required
-def profil(request):
-    """
-    Profile page
-    """
-    # uzytkownik = request.user
-
-    return render(request, 'uzytkownik/profil.html', {
-        # "uzytkownik": uzytkownik,
-        'is_profile_active': True,
-    })
-
-
 class Profil(LoginRequiredMixin, generic.DetailView):
     template_name = 'uzytkownik/profil.html'
     model = User
@@ -159,7 +142,7 @@ def edytuj_wpis_uzytkownika(request, slug):
             formularz.save()
             return redirect("uzytkownik:twoje_wpisy")
     else:
-        formularz = EdycjaGatunekUzytkownikaForm(instance=rekord)
+        formularz = GatunekUzytkownikaForm(instance=rekord)
     return render(request, "uzytkownik/edytuj_wpis.html", {
         "formularz_gestosci": formularz,
     })
@@ -174,14 +157,14 @@ class EdytujWpisUzytkownikaView(View):
         rekord = get_object_or_404(
             GatunekUzytkownika, slug=slug, stworzony_przez=request.user)
         context = {
-            "formularz_gestosci": EdycjaGatunekUzytkownikaForm(instance=rekord),
+            "formularz_gestosci": GatunekUzytkownikaForm(instance=rekord),
         }
         return render(request, "uzytkownik/edytuj_wpis.html", context)
 
     def post(self, request, slug):
         rekord = get_object_or_404(
             GatunekUzytkownika, slug=slug, stworzony_przez=request.user)
-        formularz_gestosci = EdycjaGatunekUzytkownikaForm(
+        formularz_gestosci = GatunekUzytkownikaForm(
             request.POST, instance=rekord)
 
         if formularz_gestosci.is_valid():
@@ -189,7 +172,7 @@ class EdytujWpisUzytkownikaView(View):
             return redirect("uzytkownik:gatunek-detail", slug=slug)
 
         context = {
-            "formularz_gestosci": EdycjaGatunekUzytkownikaForm(instance=rekord),
+            "formularz_gestosci": GatunekUzytkownikaForm(instance=rekord),
         }
         return render(request, "uzytkownik/edytuj_wpis.html", context)
 
